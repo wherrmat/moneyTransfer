@@ -27,9 +27,4 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public AccountModel addBalanceById(Long id, BigDecimal ammount){
-        AccountModel account = accountRepository.getReferenceById(id);
-
-        account.addBalance(ammount);
-    }
 }
