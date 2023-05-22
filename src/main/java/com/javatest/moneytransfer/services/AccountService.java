@@ -12,7 +12,7 @@ import java.util.Optional;
 public class AccountService {
 
     @Autowired
-    IAccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     public ArrayList<AccountModel> getAccounts(){
         return (ArrayList<AccountModel>) accountRepository.findAll();

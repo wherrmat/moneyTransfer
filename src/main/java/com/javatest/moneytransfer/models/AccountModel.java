@@ -46,7 +46,4 @@ public class AccountModel {
     public void setBalance(BigDecimal balance){
         this.balance = balance;
     }
-    public void addBalance(BigDecimal amount){
-        this.balance.add(amount);
-    }
 }

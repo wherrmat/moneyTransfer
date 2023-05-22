@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 @Table(name="transfers")
 public class TransferModel {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @Column(name="source_account_id")
     @JsonProperty("source_account_id")
     private Long sourceAccountId;
-
     @NotNull
     @Column(name="destination_account_id")
     @JsonProperty("destination_account_id")
@@ -27,5 +27,31 @@ public class TransferModel {
     @Column(name="amount")
     private BigDecimal amount;
 
+    public Long getId(){
+        return this.id;
+    }
+    public void setId(Long id){
+        this.id = id;
+    }
 
+    public Long getSourceAccountId(){
+        return this.sourceAccountId;
+    }
+    public void setSourceAccountId(Long sourceAccountId){
+        this.sourceAccountId = sourceAccountId;
+    }
+
+    public Long getDestinationAccountId(){
+        return this.destinationAccountId;
+    }
+    public void setDestinationAccountId(Long destinationAccountId){
+        this.destinationAccountId = destinationAccountId;
+    }
+
+    public BigDecimal getAmount(){
+        return this.amount;
+    }
+    public void setAmount(BigDecimal amount){
+        this.amount = amount;
+    }
 }
