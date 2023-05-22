@@ -27,27 +27,25 @@ public class TransferModel {
     @Column(name="amount")
     private BigDecimal amount;
 
+    // Define the methods for get and set the attributes
     public Long getId(){
         return this.id;
     }
     public void setId(Long id){
         this.id = id;
     }
-
     public Long getSourceAccountId(){
         return this.sourceAccountId;
     }
     public void setSourceAccountId(Long sourceAccountId){
         this.sourceAccountId = sourceAccountId;
     }
-
     public Long getDestinationAccountId(){
         return this.destinationAccountId;
     }
     public void setDestinationAccountId(Long destinationAccountId){
         this.destinationAccountId = destinationAccountId;
     }
-
     public BigDecimal getAmount(){
         return this.amount;
     }

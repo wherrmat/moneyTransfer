@@ -20,15 +20,17 @@ public class TransferService {
     @Autowired
     private AccountService accountService;
 
-
+    // Get all transfers from the database
     public ArrayList<TransferModel> getTransfers(){
         return (ArrayList<TransferModel>) transferRepository.findAll();
     }
 
+    // Get an account searched by id
     public Optional<TransferModel> getById(Long id){
         return transferRepository.findById(id);
     }
 
+    // Make a transfer
     public Optional<TransferModel> makeTransfer(TransferModel transfer) {
         Optional<AccountModel> sourceAccount = accountRepository.findById(transfer.getSourceAccountId());
         Optional<AccountModel> destinationAccount = accountRepository.findById(transfer.getDestinationAccountId());

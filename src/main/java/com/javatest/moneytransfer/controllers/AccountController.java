@@ -27,17 +27,19 @@ public class AccountController{
         return this.accountService.getById(id);
     }
 
-    //
+    // Create an account
     @PostMapping(path = "/createaccount")
     public AccountModel createAccount(@Valid @RequestBody AccountModel account){
         return this.accountService.createAccount(account);
     }
 
+    // Update an account by id
     @PutMapping(path = "/account{id}")
     public AccountModel updateAccountById(@RequestBody AccountModel request, Long id){
         return this.accountService.updateById(request, id);
     }
 
+    // Delete an account by id
     @DeleteMapping(path = "/delete/account{id}")
     public String deleteAccountById(@PathVariable("id") Long id){
         boolean ok = this.accountService.deleteAccount(id);

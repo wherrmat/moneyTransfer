@@ -15,16 +15,18 @@ public class TransferController {
     @Autowired
     private TransferService transferService;
 
+    // Return a list with all accounts
     @GetMapping(path = "/alltransfers")
     public ArrayList<TransferModel> getAllTransfers(){return this.transferService.getTransfers();
     }
 
-    // Return a transfer searched by ID
+    // Return a transfer searched by id
     @GetMapping(path = "/transfer{id}")
     public Optional<TransferModel> getTransfersById(@PathVariable Long id){
         return this.transferService.getById(id);
     }
 
+    // Make a transfer
     @PostMapping(path = "/maketransfer")
     public Optional<TransferModel> makeTransfer(@Valid @RequestBody TransferModel transfer){
         return this.transferService.makeTransfer(transfer);
