@@ -1,24 +1,31 @@
 package com.javatest.moneytransfer.models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 @Entity
-@Table(name="account")
+@Table(name="accounts")
 public class AccountModel {
     // Define the attributes of the account class
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="name")
-    private String name;
+    @NotNull
+    @Column(name="account_number")
+    @JsonProperty("account_number")
+    private String accountNumber;
+    @DecimalMin("0.00")
     @Column(name="balance")
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.valueOf(0.00);
 
     // Define the methods for get and set the attributes
     public Long getId(){
@@ -27,12 +34,11 @@ public class AccountModel {
     public void setId(Long id){
         this.id = id;
     }
-
-    public String getName(){
-        return this.name;
+    public String getAccountNumber(){
+        return this.accountNumber;
     }
-    public void setName(String name){
-        this.name = name;
+    public void setAccountNumber(String accountNumber){
+        this.accountNumber = accountNumber;
     }
     public BigDecimal getBalance(){
         return this.balance;
