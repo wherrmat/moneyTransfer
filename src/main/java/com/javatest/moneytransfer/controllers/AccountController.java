@@ -1,7 +1,6 @@
 package com.javatest.moneytransfer.controllers;
 
-import com.javatest.moneytransfer.exception.AccountNotFoundException;
-import com.javatest.moneytransfer.exception.ErrorResponse;
+import com.javatest.moneytransfer.exception.*;
 import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.services.AccountService;
 import jakarta.validation.Valid;
@@ -19,45 +18,81 @@ import java.util.Optional;
 public class AccountController{
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private MTExceptionHandler exceptionHandler;
+
+    // Create an account
+    @PostMapping(path = "/create")
+    public ResponseEntity<Object> createAccount(@Valid @RequestBody AccountModel account){
+        try{
+            AccountModel newAccount = this.accountService.createAccount(account);
+            return ResponseEntity.ok(newAccount);
+        }catch (AlreadyExistantAccountException ex){
+            return exceptionHandler.handleAlreadyExistantAccountException(ex);
+        }
+    }
 
     // Return a list with all accounts
     @GetMapping(path = "/allaccounts")
     public ResponseEntity<Object> getAllAccounts(){
         try{
-            ArrayList<AccountModel> accountsList = this.accountService.getAccounts();
-            return ResponseEntity.ok().build();
-        }catch (AccountNotFoundException ex){
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok(this.accountService.getAccounts());
+        }catch (EmptyTableException ex){
+            return exceptionHandler.handleEmptyTableException(ex);
         }
     }
 
     // Return an account searched by ID
-    @GetMapping(path = "/account{id}")
-    public Optional<AccountModel> getAccountById(@PathVariable Long id){
-        return this.accountService.getById(id);
+    @GetMapping(path = "/getbyid/{id}")
+    public ResponseEntity<Object> getAccountById(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok(this.accountService.getById(id));
+        }catch (AccountNotFoundException ex){
+            return exceptionHandler.handleAccountNotFoundException(ex);
+        }
     }
 
-    // Create an account
-    @PostMapping(path = "/createaccount")
-    public AccountModel createAccount(@Valid @RequestBody AccountModel account){
-        return this.accountService.createAccount(account);
+    // Return an account searched by Account Number
+    @GetMapping(path = "/getbyaccountnumber/{account_number}")
+    public ResponseEntity<Object> getAccountByAccountNumber(@PathVariable String account_number){
+        try {
+            return ResponseEntity.ok(this.accountService.getByAccountNumber(account_number));
+        }catch (AccountNotFoundException ex){
+            return exceptionHandler.handleAccountNotFoundException(ex);
+        }
     }
 
-    // Update an account by id
-    @PutMapping(path = "/account{id}")
-    public AccountModel updateAccountById(@RequestBody AccountModel request, Long id){
-        return this.accountService.updateById(request, id);
+    /**
+    // Update an account using the id number, not working
+    @PutMapping(path = "/update/{id}")
+    public ResponseEntity<Object> updateAccountById(@Valid @RequestBody AccountModel request, Long id){
+        try {
+            return ResponseEntity.ok(this.accountService.updateById(request, id));
+        }catch (AccountNotFoundException ex){
+            return exceptionHandler.handleAccountNotFoundException(ex);
+        }
+    }
+    */
+
+    // Delete an account searched by id
+    @DeleteMapping(path = "/deletebyid/{id}")
+    public ResponseEntity<Object> deleteAccountById(@PathVariable("id") Long id){
+        try{
+            return ResponseEntity.ok(this.accountService.deleteAccountById(id));
+        }catch(AccountNotFoundException ex){
+            return exceptionHandler.handleAccountNotFoundException(ex);
+        }
     }
 
-    // Delete an account by id
-    @DeleteMapping(path = "/delete/account{id}")
-    public String deleteAccountById(@PathVariable("id") Long id){
-        boolean ok = this.accountService.deleteAccount(id);
-        if(ok){
-            return "Account with id " + id + " has been deleted";
-        }else{
-            return "Error, the Account with id " + id + " has not been deleted";
+    // Delete an account searched by account_number
+    @DeleteMapping(path = "/deletebyaccountnumber/{account_number}")
+    public ResponseEntity<Object> deleteAccountByAccountNumber(@PathVariable("account_number") String account_number){
+        try{
+            return ResponseEntity.ok(this.accountService.deleteAccountByAccountNumber(account_number));
+        }catch(AccountNotFoundException ex){
+            return exceptionHandler.handleAccountNotFoundException(ex);
+        }catch(OperationFailedException ex){
+            return exceptionHandler.handleOperationFailedException(ex);
         }
     }
 }
