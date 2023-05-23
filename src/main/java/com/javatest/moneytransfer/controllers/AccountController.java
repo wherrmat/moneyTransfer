@@ -1,12 +1,17 @@
 package com.javatest.moneytransfer.controllers;
 
+import com.javatest.moneytransfer.exception.AccountNotFoundException;
+import com.javatest.moneytransfer.exception.ErrorResponse;
 import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.services.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -17,8 +22,14 @@ public class AccountController{
 
     // Return a list with all accounts
     @GetMapping(path = "/allaccounts")
-    public ArrayList<AccountModel> getAllAccounts(){
-        return this.accountService.getAccounts();
+    public ResponseEntity<Object> getAllAccounts(){
+        try{
+            ArrayList<AccountModel> accountsList = this.accountService.getAccounts();
+            return ResponseEntity.ok().build();
+        }catch (AccountNotFoundException ex){
+            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
     }
 
     // Return an account searched by ID

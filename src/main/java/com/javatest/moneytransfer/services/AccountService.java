@@ -1,5 +1,6 @@
 package com.javatest.moneytransfer.services;
 
+import com.javatest.moneytransfer.exception.AccountNotFoundException;
 import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.repositories.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,12 @@ public class AccountService {
 
     // Get all accounts from the database
     public ArrayList<AccountModel> getAccounts(){
-        return (ArrayList<AccountModel>) accountRepository.findAll();
+        ArrayList<AccountModel> accountsList = (ArrayList<AccountModel>) accountRepository.findAll();
+        if (accountsList.isEmpty()) {
+            throw new AccountNotFoundException("There are no accounts in the database");
+        }else{
+            return accountsList;
+        }
     }
 
     // Create an account
