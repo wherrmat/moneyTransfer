@@ -5,13 +5,8 @@ import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.services.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/accounts")
@@ -47,7 +42,7 @@ public class AccountController{
     public ResponseEntity<Object> getAccountById(@PathVariable Long id){
         try {
             return ResponseEntity.ok(this.accountService.getById(id));
-        }catch (AccountNotFoundException ex){
+        }catch (EntityNotFoundException ex){
             return exceptionHandler.handleAccountNotFoundException(ex);
         }
     }
@@ -57,7 +52,7 @@ public class AccountController{
     public ResponseEntity<Object> getAccountByAccountNumber(@PathVariable String account_number){
         try {
             return ResponseEntity.ok(this.accountService.getByAccountNumber(account_number));
-        }catch (AccountNotFoundException ex){
+        }catch (EntityNotFoundException ex){
             return exceptionHandler.handleAccountNotFoundException(ex);
         }
     }
@@ -68,7 +63,7 @@ public class AccountController{
     public ResponseEntity<Object> updateAccountById(@Valid @RequestBody AccountModel request, Long id){
         try {
             return ResponseEntity.ok(this.accountService.updateById(request, id));
-        }catch (AccountNotFoundException ex){
+        }catch (EntityNotFoundException ex){
             return exceptionHandler.handleAccountNotFoundException(ex);
         }
     }
@@ -79,7 +74,7 @@ public class AccountController{
     public ResponseEntity<Object> deleteAccountById(@PathVariable("id") Long id){
         try{
             return ResponseEntity.ok(this.accountService.deleteAccountById(id));
-        }catch(AccountNotFoundException ex){
+        }catch(EntityNotFoundException ex){
             return exceptionHandler.handleAccountNotFoundException(ex);
         }
     }
@@ -89,7 +84,7 @@ public class AccountController{
     public ResponseEntity<Object> deleteAccountByAccountNumber(@PathVariable("account_number") String account_number){
         try{
             return ResponseEntity.ok(this.accountService.deleteAccountByAccountNumber(account_number));
-        }catch(AccountNotFoundException ex){
+        }catch(EntityNotFoundException ex){
             return exceptionHandler.handleAccountNotFoundException(ex);
         }catch(OperationFailedException ex){
             return exceptionHandler.handleOperationFailedException(ex);

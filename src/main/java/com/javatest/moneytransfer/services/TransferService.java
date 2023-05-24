@@ -1,5 +1,8 @@
 package com.javatest.moneytransfer.services;
 
+import com.javatest.moneytransfer.exception.EmptyTableException;
+import com.javatest.moneytransfer.exception.EntityNotFoundException;
+import com.javatest.moneytransfer.exception.InsufficientFundsException;
 import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.models.TransferModel;
 import com.javatest.moneytransfer.repositories.IAccountRepository;
@@ -22,16 +25,33 @@ public class TransferService {
 
     // Get all transfers from the database
     public ArrayList<TransferModel> getTransfers(){
-        return (ArrayList<TransferModel>) transferRepository.findAll();
+        ArrayList<TransferModel> arrayList = (ArrayList<TransferModel>) transferRepository.findAll();
+        if(arrayList.isEmpty()){
+            throw new EmptyTableException("There are no transfers in the database");
+        }else{
+            return arrayList;
+        }
     }
 
     // Get an account searched by id
-    public Optional<TransferModel> getById(Long id){
-        return transferRepository.findById(id);
+    public Optional<TransferModel> getTransferById(Long id){
+        if(transferRepository.existsById(id)) {
+            return transferRepository.findById(id);
+        }else {
+            throw new EntityNotFoundException("The transfer with id " + id + " doesn't exist");
+        }
+    }
+
+    public ArrayList<TransferModel> getTransfersByAccountId(Long accountId){
+        if(transferRepository.existsBySourceAccountIdOrDestinationAccountId(accountId, accountId)) {
+            return transferRepository.findBySourceAccountIdOrDestinationAccountId(accountId, accountId);
+        }else {
+            throw new EntityNotFoundException("There are not transfers recorded for the account with id " + accountId);
+        }
     }
 
     // Make a transfer
-    public Optional<TransferModel> makeTransfer(TransferModel transfer) {
+    public TransferModel makeTransfer(TransferModel transfer) {
         Optional<AccountModel> sourceAccount = accountRepository.findById(transfer.getSourceAccountId());
         Optional<AccountModel> destinationAccount = accountRepository.findById(transfer.getDestinationAccountId());
 
@@ -48,19 +68,15 @@ public class TransferService {
                     accountService.updateById(srcAccount,transfer.getSourceAccountId());
                     accountService.updateById(dstAccount, transfer.getDestinationAccountId());
 
-                    System.out.println("Transfer was successful");
-                    return Optional.of(transferRepository.save(transfer));
+                    return transferRepository.save(transfer);
                 }else{
-                    System.out.println("Insufficient funds in the source account");
-                    return null;
+                    throw new InsufficientFundsException("Insufficient funds in the source account with id " + transfer.getSourceAccountId());
                 }
             }else{
-                System.out.println("Destination account doesn't exist");
-                return null;
+                throw new EntityNotFoundException("Destination account with id " + transfer.getDestinationAccountId() + " doesn't exist");
             }
         } else{
-            System.out.println("Source account doesn't exist");
-            return null;
+            throw new EntityNotFoundException("Source account with id " + transfer.getSourceAccountId() + " doesn't exist");
         }
     }
 }

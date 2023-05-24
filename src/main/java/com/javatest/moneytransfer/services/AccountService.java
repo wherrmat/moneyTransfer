@@ -1,15 +1,13 @@
 package com.javatest.moneytransfer.services;
 
-import com.javatest.moneytransfer.exception.AccountNotFoundException;
+import com.javatest.moneytransfer.exception.EntityNotFoundException;
 import com.javatest.moneytransfer.exception.AlreadyExistantAccountException;
 import com.javatest.moneytransfer.exception.EmptyTableException;
-import com.javatest.moneytransfer.exception.OperationFailedException;
 import com.javatest.moneytransfer.models.AccountModel;
 import com.javatest.moneytransfer.repositories.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -43,14 +41,14 @@ public class AccountService {
         if(accountRepository.existsById(id)) {
             return accountRepository.findById(id);
         }else {
-            throw new AccountNotFoundException("The account with id " + id + " doesn't exist");
+            throw new EntityNotFoundException("The account with id " + id + " doesn't exist");
         }
     }
     public AccountModel getByAccountNumber(String accountNumber){
         if(accountRepository.existsByAccountNumber(accountNumber)) {
             return accountRepository.findByAccountNumber(accountNumber);
         }else {
-            throw new AccountNotFoundException("The account with account_number " + accountNumber + " doesn't exist");
+            throw new EntityNotFoundException("The account with account_number " + accountNumber + " doesn't exist");
         }
     }
 
@@ -62,7 +60,7 @@ public class AccountService {
             account.setBalance(request.getBalance());
             return account;
         }else {
-            throw new AccountNotFoundException("The account with id " + id + " doesn't exist");
+            throw new EntityNotFoundException("The account with id " + id + " doesn't exist");
         }
     }
 
@@ -73,7 +71,7 @@ public class AccountService {
             accountRepository.deleteById(id);
             return("The account with the id " + id + " has been deleted");
         }else {
-            throw new AccountNotFoundException("The account with id " + id + " doesn't exist");
+            throw new EntityNotFoundException("The account with id " + id + " doesn't exist");
         }
     }
 
@@ -84,7 +82,7 @@ public class AccountService {
             accountRepository.deleteById(accountToDelete.getId());
             return ("The account with account_number " + accountNumber + " has been deleted");
         }else {
-            throw new AccountNotFoundException("The account with account_number " + accountNumber + " doesn't exist");
+            throw new EntityNotFoundException("The account with account_number " + accountNumber + " doesn't exist");
         }
     }
 
