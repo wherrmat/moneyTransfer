@@ -52,7 +52,7 @@ public class TransferController {
         }
     }
 
-    // Make a transfer
+    // Make a transfer using id accounts
     @PostMapping(path = "/maketransfer")
     public ResponseEntity<Object> makeTransfer(@Valid @RequestBody TransferModel transfer){
         try {

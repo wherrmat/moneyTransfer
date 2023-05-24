@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @Repository
 public interface ITransferRepository extends JpaRepository<TransferModel, Long> {
     boolean existsBySourceAccountIdOrDestinationAccountId(Long sourceAccountId, Long destinationAccountId);
-
     ArrayList<TransferModel> findBySourceAccountIdOrDestinationAccountId(Long sourceAccountId, Long destinationAccountId);
+
+
 }
