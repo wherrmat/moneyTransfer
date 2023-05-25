@@ -14,9 +14,13 @@ echo
 # POST
 echo "POST"
 curl -X POST -H "Content-Type: application/json" -d '{"balance":1000.00, "account_number":"AC001"}' $API_ACCOUNTS"/create"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"balance":1000.00, "account_number":"AC002"}' $API_ACCOUNTS"/create"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"balance":1000.00, "account_number":"AC003"}' $API_ACCOUNTS"/create"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"balance":1000.00, "account_number":"AC004"}' $API_ACCOUNTS"/create"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"balance":1000.00, "account_number":"AC005"}' $API_ACCOUNTS"/create"
 echo
 
@@ -64,11 +68,22 @@ echo
 # POST
 echo "POST"
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":3, "destination_account_id":4, "amount":100.0}' $API_TRANSFERS"/maketransfer"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":3, "destination_account_id":5, "amount":100.0}' $API_TRANSFERS"/maketransfer"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":4, "destination_account_id":3, "amount":200.0}' $API_TRANSFERS"/maketransfer"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":4, "destination_account_id":5, "amount":200.0}' $API_TRANSFERS"/maketransfer"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":3, "amount":300.0}' $API_TRANSFERS"/maketransfer"
+echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":4, "amount":300.0}' $API_TRANSFERS"/maketransfer"
+echo
+curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":4, "amount":500.0}' $API_TRANSFERS"/maketransfer"
+echo
+curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":1, "destination_account_id":4, "amount":100.0}' $API_TRANSFERS"/maketransfer"
+echo
+curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":2, "amount":100.0}' $API_TRANSFERS"/maketransfer"
 echo
 
 # GET
