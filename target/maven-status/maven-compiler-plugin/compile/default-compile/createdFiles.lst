@@ -1,0 +1,16 @@
+com\javatest\moneytransfer\exception\EmptyTableException.class
+com\javatest\moneytransfer\exception\ErrorResponse.class
+com\javatest\moneytransfer\controllers\TransferController.class
+com\javatest\moneytransfer\exception\MTExceptionHandler.class
+com\javatest\moneytransfer\models\TransferModel.class
+com\javatest\moneytransfer\services\AccountService.class
+com\javatest\moneytransfer\exception\EntityNotFoundException.class
+com\javatest\moneytransfer\repositories\ITransferRepository.class
+com\javatest\moneytransfer\exception\InsufficientFundsException.class
+com\javatest\moneytransfer\repositories\IAccountRepository.class
+com\javatest\moneytransfer\models\AccountModel.class
+com\javatest\moneytransfer\exception\AlreadyExistantAccountException.class
+com\javatest\moneytransfer\controllers\AccountController.class
+com\javatest\moneytransfer\services\TransferService.class
+com\javatest\moneytransfer\exception\OperationFailedException.class
+com\javatest\moneytransfer\MoneytransferApplication.class
