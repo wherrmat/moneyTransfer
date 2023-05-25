@@ -79,7 +79,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "de
 echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":4, "amount":300.0}' $API_TRANSFERS"/maketransfer"
 echo
-curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":4, "amount":500.0}' $API_TRANSFERS"/maketransfer"
+curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":5, "destination_account_id":4, "amount":800.0}' $API_TRANSFERS"/maketransfer"
 echo
 curl -X POST -H "Content-Type: application/json" -d '{"source_account_id":1, "destination_account_id":4, "amount":100.0}' $API_TRANSFERS"/maketransfer"
 echo
