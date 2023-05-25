@@ -48,6 +48,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>money_transfer_api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

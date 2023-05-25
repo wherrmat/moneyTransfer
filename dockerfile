@@ -1,9 +1,4 @@
-FROM adoptopenjdk:17-jdk-hotspot
-
-WORKDIR /app
-
-COPY moneytransfer-0.0.1-SNAPSHOT.jar
-
+FROM openjdk:17-jdk-alpine
 EXPOSE 8080
-
-CMD ["java", "-jar", "app.jar"]
+COPY target/money_transfer_api.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]

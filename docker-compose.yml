@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  mysql-db-mt-container:
+    container_name: mysql-db-mt-container
+    image: mysql-db-mt-image
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USERNAME: root
+      PASSWORD: Malta_2023
+    volumes:
+      - mysql-mt-volume:/var/lib/mysql
+
+  java17-api-mt-container:
+    container_name: java17-api-mt-container
+    image: java17-api-mt-image
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL = jdbc:mysql://mysql-db-mt-container:3306/money_transfer_db
+      - DATABASE_USERNAME = root
+      - DATABASE_PASSWORD = Malta_2023
+
+    depends_on:
+      - mysql-db-mt-container
