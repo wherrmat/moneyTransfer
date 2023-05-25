@@ -19,7 +19,7 @@ docker rm $MYSQL_CONTAINER_NAME
 docker stop $JAVA_API_CONTAINER_NAME
 docker rm $JAVA_API_CONTAINER_NAME
 
-docker volume prune
+docker volume rm $VOLUME_NAME
 
 docker network rm $NETWORK_NAME
 
