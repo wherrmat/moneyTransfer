@@ -60,7 +60,7 @@ The test script makes Http queries to the API to test the endpoints and some exc
 
 ### To execute the test
 
-*Open a terminal*
+*Open a terminal in the moneyTransfer directory*
 
 1. Give execution permissions to the test.sh file: `chmod +x test.sh`
 2. Execute the init.sh file: `sudo ./test.sh`
