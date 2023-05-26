@@ -44,13 +44,15 @@ docker run --name $JAVA_API_CONTAINER_NAME --network $NETWORK_NAME -p 8080:8080 
 echo "Java container has been deployed"
 echo
 
-# Wait for 10 seconds
-sleep 10
+# Wait for 15 seconds
+echo "Wait for the containers start correctly"
+sleep 15
 
 docker ps
 
-# Wait for 10 seconds
-sleep 5
+echo "Wait for the API deployment"
+# Wait for 15 seconds
+sleep 15
 curl -X GET "http://localhost:8080/accounts/allaccounts"
 echo
 curl -X GET "http://localhost:8080/transfers/alltransfers"
