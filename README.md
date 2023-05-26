@@ -416,6 +416,15 @@ Connection: close
 "destination_account_id": 4
 }`
 
-## Contact
-If you have any questions or suggestions, please contact me:
-- **email**: [wilmeryes96@yahoo.es]
+## Exceptions
+
+The API may throw the following exceptions in certain situations
+
+### 1. EmptyTableException (HttpStatus.NOT_FOUND)
+
+This exception is thrown when trying to query an empty table in the database.
+
+Error messages:
+
+    - "There are no accounts in the database"
+    - ""There are no transfers in the database""
