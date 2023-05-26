@@ -101,7 +101,7 @@ echo "GET transfer by id 6"
 curl -X GET $API_TRANSFERS"/transferbyid/6"
 echo
 
-echo "GET transfers by account_id"
+echo "GET transfers by account id 3"
 curl -X GET $API_TRANSFERS"/transfersbyaccountid/3"
 echo
 
