@@ -3,6 +3,8 @@
 API_ACCOUNTS="http://localhost:8080/accounts"
 API_TRANSFERS="http://localhost:8080/transfers"
 
+echo "TEST START"
+echo
 
 echo "ACCOUNTS"
 
@@ -103,6 +105,8 @@ echo "GET transfers by account_id"
 curl -X GET $API_TRANSFERS"/transfersbyaccountid/3"
 echo
 
+echo "TEST END"
+echo
 
 
 
