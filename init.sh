@@ -52,5 +52,9 @@ docker ps
 
 echo "Wait for the API deployment"
 docker logs -f $JAVA_API_CONTAINER_NAME &
-sleep 15
-echo
+
+until curl --silent --fail --fail-early http://localhost:8080/accounts/allaccounts >/dev/null; do
+    sleep 5
+done
+
+echo "API running..."
