@@ -70,11 +70,12 @@ using the following connection details:
 ## Table "Accounts"
 This table records accounts.
 
-| Field          | Type          | Description                              |
-|----------------|---------------|------------------------------------------|
-| id             | int           | ID of the account, unique, (PRIMARY KEY) |
-| account_number | varchar(20)   | Personalized account number, unique      |
-| balance        | decimal(10,2) | Current account balance                  |
+| Field              | Type          | Description                              |
+|--------------------|---------------|------------------------------------------|
+| id                 | int           | ID of the account, unique, (PRIMARY KEY) |
+| transfer_timestamp | timestamp     | date and time of the transfer            |
+| account_number     | varchar(20)   | Personalized account number, unique      |
+| balance            | decimal(10,2) | Current account balance                  |
 
 ## Table "Transfers"
 This table records transfers of funds between accounts.
@@ -93,62 +94,157 @@ This API receives requests on local host on port 8080.
 ## Accounts
 
 ### Endpoint 1: Create an account
-
 **Url**
-`POST http://localhost:8080/accounts/create`
+`http://localhost:8080/accounts/create`
 
 **Parameters**
 
 | PARAMETER      | TYPE    | DESCRIPTION                    |
 |----------------|---------|--------------------------------|
 | balance        | decimal | Initial balance of the account |
-| account_number | String  | Personalized account number    |
+| account_number | string  | Personalized account number    |
 
 **Example**
-`POST http://localhost:8080/accounts/create`
-`Content-Type: application/json`
-`{
+`POST http://localhost:8080/accounts/create
+Content-Type: application/json
+{
     "balance": 1000.00,
     "account_number": "A001"
 }`
 
-- Código: 201 Created
-- Tipo de contenido: application/json
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 13:55:16 GMT
+Connection: close
+{
+"id": 1,
+"balance": 1000.00,
+"account_number": "A001"
+}`
 
+### Endpoint 2: Return a list with all accounts
+**Url**
+`http://localhost:8080/accounts/allaccounts`
 
-Respuesta de error
+**Parameters**
+*No additional parameters required*
 
-Código: 404 Not Found
-Tipo de contenido: text/plain
-perl
-Copy code
-Usuario no encontrado.
-Ejemplo de solicitud
+**Example**
+`GET http://localhost:8080/accounts/allaccounts`
 
-- Endpoint 2: [Descripción del endpoint, ruta, método, parámetros, respuestas]
-// Return a list with all accounts
-@GetMapping(path = "/allaccounts")
-public ResponseEntity<Object> getAllAccounts()
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:03:03 GMT
+Connection: close
+[
+{
+"id": 1,
+"balance": 1000.00,
+"account_number": "A001"
+},
+{
+"id": 2,
+"balance": 1000.00,
+"account_number": "A002"
+}
+]`
 
-- Endpoint 3: [Descripción del endpoint, ruta, método, parámetros, respuestas]
+### Endpoint 3: Return an account searched by ID
+**Url**
+`http://localhost:8080/accounts/getbyid/{id}`
 
-- Endpoint 4: [Descripción del endpoint, ruta, método, parámetros, respuestas]
+**Parameters**
 
-- Endpoint 5: [Descripción del endpoint, ruta, método, parámetros, respuestas]
+| PARAMETER | TYPE | DESCRIPTION                    |
+|-----------|------|--------------------------------|
+| id        | int  | Account id you want to consult |
 
-- Endpoint 6: [Descripción del endpoint, ruta, método, parámetros, respuestas]
+**Example**
+`GET http://localhost:8080/accounts/getbyid/1`
 
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:09:25 GMT
+Connection: close
+{
+"id": 1,
+"balance": 1000.00,
+"account_number": "A001"
+}`
 
-## Contacto
+### Endpoint 4: Return an account searched by account number
+**Url**
+`http://localhost:8080/accounts/getbyaccountnumber/{account_number}`
 
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
+**Parameters**
 
-- Correo electrónico: [tuemail@example.com]
-- [Enlaces a foros o canales de comunicación adicionales, si los hay]
-Recuerda que este es solo un ejemplo básico y que puedes adaptar el contenido según las necesidades específicas de tu API y proyecto.
+| PARAMETER       | TYPE   | DESCRIPTION                        |
+|-----------------|--------|------------------------------------|
+| account_number  | string | Account number you want to consult |
 
+**Example**
+`GET http://localhost:8080/accounts/getbyid/1`
 
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:18:04 GMT
+Connection: close
+{
+"id": 2,
+"balance": 1000.00,
+"account_number": "A002"
+}`
 
+### Endpoint 5: Delete an account using the ID
+**Url**
+`http://localhost:8080/accounts/deletebyid/{id}`
 
+**Parameters**
 
+| PARAMETER | TYPE | DESCRIPTION                    |
+|-----------|------|--------------------------------|
+| id        | int  | Account id you want to consult |
 
+**Example**
+`DELETE http://localhost:8080/accounts/deletebyid/1`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 42
+Date: Fri, 26 May 2023 14:18:49 GMT
+Connection: close
+The account with the id 1 has been deleted`
+
+### Endpoint 6: Return an account searched by account number
+**Url**
+`http://localhost:8080/accounts/deletebyaccountnumber/{account_number}`
+
+**Parameters**
+
+| PARAMETER       | TYPE   | DESCRIPTION                        |
+|-----------------|--------|------------------------------------|
+| account_number  | string | Account number you want to consult |
+
+**Example**
+`DELETE http://localhost:8080/accounts/deletebyaccountnumber/A002`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 53
+Date: Fri, 26 May 2023 14:20:39 GMT
+Connection: close
+The account with account_number A002 has been deleted`
+
+## Contact
+If you have any questions or suggestions, please contact me:
+- **email**: [wilmeryes96@yahoo.es]
