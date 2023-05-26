@@ -167,9 +167,9 @@ Connection: close
 
 **Parameters**
 
-| PARAMETER | TYPE | DESCRIPTION                    |
-|-----------|------|--------------------------------|
-| id        | int  | Account id you want to consult |
+| PARAMETER | TYPE | DESCRIPTION                   |
+|-----------|------|-------------------------------|
+| id        | int  | Account id you want to query  |
 
 **Example**
 `GET http://localhost:8080/accounts/getbyid/1`
@@ -192,9 +192,9 @@ Connection: close
 
 **Parameters**
 
-| PARAMETER       | TYPE   | DESCRIPTION                        |
-|-----------------|--------|------------------------------------|
-| account_number  | string | Account number you want to consult |
+| PARAMETER       | TYPE   | DESCRIPTION                      |
+|-----------------|--------|----------------------------------|
+| account_number  | string | Account number you want to query |
 
 **Example**
 `GET http://localhost:8080/accounts/getbyid/1`
@@ -316,9 +316,9 @@ Connection: close
 
 **Parameters**
 
-| PARAMETER | TYPE | DESCRIPTION                     |
-|-----------|------|---------------------------------|
-| id        | int  | Transfer id you want to consult |
+| PARAMETER | TYPE | DESCRIPTION                    |
+|-----------|------|--------------------------------|
+| id        | int  | Transfer id you want to query  |
 
 **Example**
 `GET http://localhost:8080/transfers/transferbyid/1`
