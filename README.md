@@ -34,7 +34,7 @@ This API was developed in a Windows 10 environment, making use of the following 
 
 ## Test
 The test file makes Http queries to the API to test the endpoints and some exceptions
-    - Attempt to obtain the list of accounts (empty)
+- Attempt to obtain the list of accounts (empty)
     - Account creation
     - Query the list of accounts
     - Query accounts individually by id and account number
