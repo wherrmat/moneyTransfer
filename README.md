@@ -33,22 +33,22 @@ This API was developed in a Windows 10 environment, making use of the following 
 4. Execute the init.sh file: `sudo ./init.sh`
 
 ## Test
-The test file makes Http queries to the API to test the endpoints and some exceptions
-- Attempt to obtain the list of accounts (empty)
-    - Account creation
-    - Query the list of accounts
-    - Query accounts individually by id and account number
-    - Delete individual accounts by id and account number
-    - Attempt to query non-existent accounts by id and account number
-    - Attempt to obtain transfer list (empty)
-    - Making of transfers
-    - Attempt of transfer without sufficient funds
-    - Attempt of transfer with non-existent source account
-    - Attempt of transfer with non-existent destination account
-    - Query the transfer list
-    - Query the list of accounts with the new balances
-    - Query a transfer by id
-    - Query the list of transfers related to an account id
+The test script makes Http queries to the API to test the endpoints and some exceptions
+1. Attempt to obtain the list of accounts (empty)
+2. Account creation
+3. Query the list of accounts
+4. Query accounts individually by id and account number
+5. Delete individual accounts by id and account number
+6. Attempt to query non-existent accounts by id and account number
+7. Attempt to obtain transfer list (empty)
+8. Making of transfers
+9. Attempt of transfer without sufficient funds
+10. Attempt of transfer with non-existent source account
+11. Attempt of transfer with non-existent destination account
+12. Query the transfer list
+13. Query the list of accounts with the new balances
+14. Query a transfer by id
+15. Query the list of transfers related to an account id
 
 1. Give execution permissions to the test.sh file: `chmod +x test.sh`
 2. Execute the init.sh file: `sudo ./test.sh`
