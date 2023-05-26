@@ -209,9 +209,9 @@ Connection: close
 
 **Parameters**
 
-| PARAMETER | TYPE | DESCRIPTION                    |
-|-----------|------|--------------------------------|
-| id        | int  | Account id you want to consult |
+| PARAMETER | TYPE | DESCRIPTION                   |
+|-----------|------|-------------------------------|
+| id        | int  | Account id you want to delete |
 
 **Example**
 `DELETE http://localhost:8080/accounts/deletebyid/1`
@@ -224,15 +224,15 @@ Date: Fri, 26 May 2023 14:18:49 GMT
 Connection: close
 The account with the id 1 has been deleted`
 
-### Endpoint 6: Return an account searched by account number
+### Endpoint 6: Delete an account using the account number
 **Url**
 `http://localhost:8080/accounts/deletebyaccountnumber/{account_number}`
 
 **Parameters**
 
-| PARAMETER       | TYPE   | DESCRIPTION                        |
-|-----------------|--------|------------------------------------|
-| account_number  | string | Account number you want to consult |
+| PARAMETER       | TYPE   | DESCRIPTION                       |
+|-----------------|--------|-----------------------------------|
+| account_number  | string | Account number you want to delete |
 
 **Example**
 `DELETE http://localhost:8080/accounts/deletebyaccountnumber/A002`
@@ -244,6 +244,169 @@ Content-Length: 53
 Date: Fri, 26 May 2023 14:20:39 GMT
 Connection: close
 The account with account_number A002 has been deleted`
+
+## Transfers
+
+### Endpoint 7: Return a list with all transfers
+**Url**
+`http://localhost:8080/transfers/alltransfers`
+
+**Parameters**
+*No additional parameters required*
+
+**Example**
+`GET http://localhost:8080/transfers/alltransfers`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:28:01 GMT
+Connection: close
+[
+{
+"id": 1,
+"amount": 100.00,
+"source_account_id": 3,
+"destination_account_id": 4
+},
+{
+"id": 2,
+"amount": 100.00,
+"source_account_id": 3,
+"destination_account_id": 5
+},
+{
+"id": 3,
+"amount": 200.00,
+"source_account_id": 4,
+"destination_account_id": 3
+},
+{
+"id": 4,
+"amount": 200.00,
+"source_account_id": 4,
+"destination_account_id": 5
+},
+{
+"id": 5,
+"amount": 300.00,
+"source_account_id": 5,
+"destination_account_id": 3
+},
+{
+"id": 6,
+"amount": 300.00,
+"source_account_id": 5,
+"destination_account_id": 4
+}
+]`
+
+### Endpoint 8: Return a transfer searched by the transfer ID
+**Url**
+`http://localhost:8080/transfers/transferbyid/{id}`
+
+**Parameters**
+
+| PARAMETER | TYPE | DESCRIPTION                     |
+|-----------|------|---------------------------------|
+| id        | int  | Transfer id you want to consult |
+
+**Example**
+`GET http://localhost:8080/transfers/transferbyid/1`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:34:01 GMT
+Connection: close
+{
+"id": 1,
+"amount": 100.00,
+"source_account_id": 3,
+"destination_account_id": 4
+}`
+
+### Endpoint 9: Return a transfers list related to an account id
+**Url**
+`http://localhost:8080/transfers/transfersbyaccountid/{accountid}`
+
+**Parameters**
+
+| PARAMETER | TYPE | DESCRIPTION                                  |
+|-----------|------|----------------------------------------------|
+| id        | int  | Account id you want to consult the transfers |
+
+**Example**
+`GET http://localhost:8080/transfers/transfersbyaccountid/4`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:37:50 GMT
+Connection: close
+[
+{
+"id": 1,
+"amount": 100.00,
+"source_account_id": 3,
+"destination_account_id": 4
+},
+{
+"id": 3,
+"amount": 200.00,
+"source_account_id": 4,
+"destination_account_id": 3
+},
+{
+"id": 4,
+"amount": 200.00,
+"source_account_id": 4,
+"destination_account_id": 5
+},
+{
+"id": 6,
+"amount": 300.00,
+"source_account_id": 5,
+"destination_account_id": 4
+}
+]`
+
+### Endpoint 10: Make a transfer
+**Url**
+`http://localhost:8080/transfers/maketransfer`
+
+**Parameters**
+
+| PARAMETER               | TYPE    | DESCRIPTION                   |
+|-------------------------|---------|-------------------------------|
+| source_account_id       | int     | Id of the source account      |
+| destination_account_id  | int     | Id of the destination account |
+| amount                  | decimal | Transfer amount               |
+
+**Example**
+`POST http://localhost:8080/transfers/maketransfer
+Content-Type: application/json
+{
+"source_account_id": 3,
+"destination_account_id": 4,
+"amount":100.0
+}`
+
+**Response**
+`HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Fri, 26 May 2023 14:42:25 GMT
+Connection: close
+{
+"id": 7,
+"amount": 100.0,
+"source_account_id": 3,
+"destination_account_id": 4
+}`
 
 ## Contact
 If you have any questions or suggestions, please contact me:
