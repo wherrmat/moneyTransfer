@@ -52,4 +52,5 @@ docker ps
 
 echo "Wait for the API deployment"
 docker logs -f $JAVA_API_CONTAINER_NAME &
+sleep 15
 echo
