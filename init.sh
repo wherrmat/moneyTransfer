@@ -51,12 +51,5 @@ sleep 15
 docker ps
 
 echo "Wait for the API deployment"
-# Wait for 15 seconds
-sleep 15
-curl -X GET "http://localhost:8080/accounts/allaccounts"
-echo
-curl -X GET "http://localhost:8080/transfers/alltransfers"
-echo
-
-echo "MySQL database and Java17 API have been deployed"
+docker logs -f $JAVA_API_CONTAINER_NAME &
 echo
