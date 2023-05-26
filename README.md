@@ -54,7 +54,7 @@ The test script makes Http queries to the API to test the endpoints and some exc
 1. Give execution permissions to the test.sh file: `chmod +x test.sh`
 2. Execute the init.sh file: `sudo ./test.sh`
 
-- *If you want to repeat the test or remove the deployment from the project in docker (Optional)*
+*If you want to repeat the test or remove the deployment from the project in docker (Optional)*
 3. Give execution permissions to the delete.sh file: `chmod +x delete.sh`
 4. Execute the delete.sh file: `sudo ./delete.sh`
 
