@@ -1,7 +1,7 @@
-# MONEY TRANSFER API
+# Money transfer API
 
-This API runs in a docker container, provides functionality to manage accounts and money transfers between them using a dockerised mysql database.
-using a dockerised mysql database.
+This API runs in a docker container, provides functionality to manage
+accounts and money transfers between them using a dockerised mysql database.
 
 ## Development
 This API was developed in a Windows 10 environment, making use of the following tools:
@@ -56,55 +56,61 @@ The test file makes Http queries to the API to test the endpoints and some excep
 3. Give execution permissions to the delete.sh file: `chmod +x delete.sh`
 4. Execute the delete.sh file: `sudo ./delete.sh`
 
-# Documentación de la Base de Datos
+# MySQL database
+The database for this project is dockerised and can be accessed from outside the container
+using the following connection details:
+- **Host**: localhost
+- **Port**: 3306
+- **Username**: root
+- **Password**: Malta_2023
+- **Database name**: money_transfer_db
 
-## MySQL database
+![Database diagram](/mysql_db/schema.png)
 
-### Table "Accounts"
+## Table "Accounts"
+This table records accounts.
 
-EThis table storage information of the accounts.
-
-| Field          | Type          | Description                         |
-|----------------|---------------|-------------------------------------|
-| id             | int           | ID of the account, unique           |
-| account_number | varchar(20)   | Personalized account number, unique |
-| balance        | decimal(10,2) | Current account balance             |
+| Field          | Type          | Description                              |
+|----------------|---------------|------------------------------------------|
+| id             | int           | ID of the account, unique, (PRIMARY KEY) |
+| account_number | varchar(20)   | Personalized account number, unique      |
+| balance        | decimal(10,2) | Current account balance                  |
 
 ## Table "Transfers"
+This table records transfers of funds between accounts.
 
-Esta tabla registra las transferencias de fondos entre cuentas.
-
-
-| Field          | Type          | Description                         |
-|----------------|---------------|-------------------------------------|
-| id             | int           | ID of the account, unique           |
-| account_number | varchar(20)   | Personalized account number, unique |
-| balance        | decimal(10,2) | Current account balance             |
-
---
+| Field                      | Type          | Description                                  |
+|----------------------------|---------------|----------------------------------------------|
+| id                         | big int       | ID of the transfer, unique, (PRIMARY KEY)    |
+| source_account_number      | int           | Id of the source account, (FOREIGN KEY)      |
+| destination_account_number | int           | Id of the destination account, (FOREIGN KEY) | 
+| amount                     | decimal(10,2) | Amount of the transfer                       |
 
 
-
-
-## Use
+# Use of the API
 This API receives requests on local host on port 8080.
 
 ## Accounts
 
 ### Endpoint 1: Create an account
 
-**URL**
-
+**Url**
 `POST http://localhost:8080/accounts/create`
 
 **Parameters**
 
-| PARAMETER     | TYPE    | DESCRIPTION                    |
-|---------------|---------|--------------------------------|
-| balance       | decimal | Initial balance of the account |
-| accoun_number | String  | Personalized account number    |
+| PARAMETER      | TYPE    | DESCRIPTION                    |
+|----------------|---------|--------------------------------|
+| balance        | decimal | Initial balance of the account |
+| account_number | String  | Personalized account number    |
 
-**Respuesta exitosa**
+**Example**
+`POST http://localhost:8080/accounts/create`
+`Content-Type: application/json`
+`{
+    "balance": 1000.00,
+    "account_number": "A001"
+}`
 
 - Código: 201 Created
 - Tipo de contenido: application/json
