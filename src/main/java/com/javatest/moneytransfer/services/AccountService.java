@@ -44,6 +44,7 @@ public class AccountService {
             throw new EntityNotFoundException("The account with id " + id + " doesn't exist");
         }
     }
+    // Get an account searched by account number
     public AccountModel getByAccountNumber(String accountNumber){
         if(accountRepository.existsByAccountNumber(accountNumber)) {
             return accountRepository.findByAccountNumber(accountNumber);

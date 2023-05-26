@@ -422,7 +422,62 @@ The API may throw the following exceptions in certain situations
 
 ### 1. EmptyTableException (HttpStatus.NOT_FOUND)
 This exception is thrown when trying to query an empty table in the database.
+
+Situations:
+
+    - Query the list of all accounts when the accounts table is empty
+    - Query the list of all transfers when the transfers table is empty
+
 Error messages:
 
     - "There are no accounts in the database"
     - "There are no transfers in the database"
+
+### 2. AlreadyExistantAccountException (HttpStatus.CONFLICT)
+This exception is thrown when trying to create an account that already exists.
+
+Situations:
+
+    - Create an account with an account number that already exists in the database
+
+Error messages:
+
+    - "The account you are trying to create already exists in the database"
+
+### 3. EntityNotFoundException (HttpStatus.NOT_FOUND)
+This exception is thrown when trying to use an entity that no exists in the database.
+
+Situations:
+
+    - Querying an account using a non-existent id
+    - Querying an account using a non-existent account number
+    - Delete an account using a non-existent id
+    - Delete an account using a non-existent account_number
+    - Querying a transfer using a non-existent transfer id
+    - Querying a transfers list related to an account using a non-existent account id
+    - Attempting a transfer using a non-existent source account identifier
+    - Attempting a transfer using a non-existent destination account identifier
+
+Error messages:
+
+    - "The account with id {id} doesn't exist"
+    - "The account with account_number {accountNumber} doesn't exist"
+    - "Destination account with id {id} doesn't exist"
+    - "Source account with id {id} doesn't exist"
+
+### 4. InsufficientFundsException (HttpStatus.BAD_REQUEST)
+This exception is thrown when trying to transfer money from a source account without enough balance.
+
+Situations:
+
+    - Transfer an amount from a source account without enough balance.
+
+Error messages:
+
+    - "Insufficient funds in the source account with id {id}"
+
+## Contact
+
+**If you have any questions or suggestions, please contact me:**
+
+- email: [wilmeryes96@yahoo.es]
