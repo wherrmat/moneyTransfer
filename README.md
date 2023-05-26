@@ -8,7 +8,7 @@ This API was developed in a Windows 10 environment, making use of the following 
 
 **Initializer [Spring initializr](https://start.spring.io/)**
 
-**Initializer [screenshot](/springInitializer.JPG)**
+**Initializer ![screenshot](/springInitializer.JPG)**
 
     - Maven project
         - Apache Maven (Installed version 3.9.2)
