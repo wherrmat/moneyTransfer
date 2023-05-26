@@ -6,7 +6,10 @@ accounts and money transfers between them using a dockerised mysql database.
 ## Development
 This API was developed in a Windows 10 environment, making use of the following tools:
 
-**Initializer [Spring initializr](https://start.spring.io/) / to see the specific project configuration open "sprogInitializer.JPG"**
+**Initializer [Spring initializr](https://start.spring.io/)**
+
+**Initializer [screenshot](/springInitializer.JPG)**
+
     - Maven project
         - Apache Maven (Installed version 3.9.2)
     - Programming language Java
@@ -17,9 +20,11 @@ This API was developed in a Windows 10 environment, making use of the following 
         - Spring Data JPA
 
 **IntelliJ IDEA**
+
     - GitHub and IntelliJ integration to facilite uploading code directly to the github repository
 
 **Docker**
+
     - version 23.0.5
 
 ## Prerequisites
