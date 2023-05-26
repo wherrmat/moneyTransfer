@@ -33,7 +33,7 @@ This API was developed in a Windows 10 environment, making use of the following 
 
 ## Deploy in Linux
 
-*Create a new directory to contain the project and open a terminal in the empty directory*
+*Create a new directory to contain the project and open a terminal in that empty directory*
 
 1. Clone the repository: `git clone https://github.com/wherrmat/moneyTransfer.git`
 2. Go to the project directory: `cd moneyTransfer`
