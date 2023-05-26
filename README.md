@@ -32,6 +32,9 @@ This API was developed in a Windows 10 environment, making use of the following 
     - Knowledge how to use docker commands
 
 ## Deploy in Linux
+
+*Create a new directory to contain the project and open a terminal in the empty directory*
+
 1. Clone the repository: `git clone https://github.com/wherrmat/moneyTransfer.git`
 2. Go to the project directory: `cd moneyTransfer`
 3. Give execution permissions to the init.sh file: `chmod +x init.sh`
@@ -56,6 +59,9 @@ The test script makes Http queries to the API to test the endpoints and some exc
 - Query the list of transfers related to an account id
 
 ### To execute the test
+
+*Open a terminal*
+
 1. Give execution permissions to the test.sh file: `chmod +x test.sh`
 2. Execute the init.sh file: `sudo ./test.sh`
 
